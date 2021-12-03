@@ -1,9 +1,14 @@
-package com.udacity.asteroidradar
+package com.udacity.asteroidradar.ui
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.udacity.asteroidradar.R
+import com.udacity.asteroidradar.domain.Asteroid
+import com.udacity.asteroidradar.ui.main.AsteroidListAdapter
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -46,5 +51,26 @@ fun setImgUrl(imageView: ImageView, url: String?) {
     url?.let {
         Picasso.get().load(it).placeholder(R.drawable.loading_animation)
             .error(R.drawable.ic_broken_image).into(imageView)
-    }
+    } ?: return
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
+    data?.let {
+        val adapter = recyclerView.adapter as AsteroidListAdapter
+        adapter.submitList(it) {
+            // scroll the list to the top after the diffs are calculated and posted
+            recyclerView.scrollToPosition(0)
+        }
+    } ?: return
+}
+
+@BindingAdapter("goneIfNotNull")
+fun goneIfNotNull(view: View, it: Any?) {
+    view.visibility = if (it != null) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter("visibleIfNotNull")
+fun visibleIfNotNull(view: View, it: Any?) {
+    view.visibility = if (it != null) View.VISIBLE else View.GONE
 }
