@@ -49,7 +49,7 @@ private fun dateFormatter(date: Date): String {
     return dateFormat.format(date)
 }
 
-private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
+fun getNextSevenDaysFormattedDates(): ArrayList<String> {
     val formattedDateList = ArrayList<String>()
 
     val calendar = Calendar.getInstance()
@@ -62,7 +62,7 @@ private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
     return formattedDateList
 }
 
-fun startDate(): String = dateFormatter(Calendar.getInstance().time)
+fun todayDate(): String = dateFormatter(Calendar.getInstance().time)
 
 fun endDate(): String {
     val calendar = Calendar.getInstance().apply {

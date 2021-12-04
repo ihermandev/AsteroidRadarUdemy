@@ -1,14 +1,17 @@
 package com.udacity.asteroidradar.ui.main
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.udacity.asteroidradar.data.AsteroidsDataFilter
+import com.udacity.asteroidradar.data.api.todayDate
 import com.udacity.asteroidradar.data.database.getDatabase
 import com.udacity.asteroidradar.data.repository.AsteroidRepository
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -31,9 +34,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val pictureOfDayUrl: LiveData<PictureOfDay>
         get() = _pictureOfDayUrl
 
-    private val _asteroids = repository.asteroids
-    val asteroids: LiveData<List<Asteroid>>
-        get() = _asteroids
+    private val _asteroids = MutableLiveData(AsteroidsDataFilter.SAVED_ASTEROIDS)
+    val asteroids = Transformations.switchMap(_asteroids) { filter ->
+        when (filter) {
+            AsteroidsDataFilter.WEEK_ASTEROIDS -> {
+                repository.weekAsteroids
+            }
+            AsteroidsDataFilter.TODAY_ASTEROIDS -> {
+                repository.todayAsteroids
+            }
+            else -> {
+                repository.asteroids
+            }
+        }
+    }
+
+    fun updateFilter(filter: AsteroidsDataFilter) {
+        _asteroids.postValue(filter)
+    }
 
     private fun handleError(e: Exception) {
         Timber.e(e)
