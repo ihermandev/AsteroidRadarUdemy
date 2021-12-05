@@ -7,6 +7,7 @@ import com.udacity.asteroidradar.data.api.todayDate
 import com.udacity.asteroidradar.data.database.getDatabase
 import com.udacity.asteroidradar.data.repository.AsteroidRepository
 import com.udacity.asteroidradar.domain.PictureOfDay
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

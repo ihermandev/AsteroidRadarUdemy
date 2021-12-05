@@ -24,7 +24,7 @@ ext {
     legacy_v4_version = "1.0.0"
     recyclerview_version = "1.2.1"
     room_version = "2.3.0"
-    work_manager_version = "1.0.1"
+    work_manager_version = "2.7.1"
 
     // Lib
     timber_version = "5.0.1"

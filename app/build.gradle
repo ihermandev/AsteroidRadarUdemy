@@ -87,7 +87,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     //WorkManager
-    implementation "android.arch.work:work-runtime-ktx:$work_manager_version"
+    implementation "androidx.work:work-runtime-ktx:$work_manager_version"
 
     //Logger
     implementation "com.jakewharton.timber:timber:$timber_version"

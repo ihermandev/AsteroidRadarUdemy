@@ -51,7 +51,7 @@ fun DatabaseAsteroid.asDomainModel(): Asteroid {
 
 @Entity(tableName = PICTURE_TABLE)
 data class DataBasePicture(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Long = 0,
     val url: String,
     val title: String

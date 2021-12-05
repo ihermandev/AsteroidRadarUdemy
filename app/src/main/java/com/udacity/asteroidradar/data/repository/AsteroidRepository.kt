@@ -83,16 +83,22 @@ class AsteroidRepository(
         }
     }
 
-    suspend fun clearImageOfDayData(): Int {
-        return database.pictureDao.clearTable()
+    suspend fun clearImageOfDayData() {
+        withContext(Dispatchers.IO) {
+            database.pictureDao.clearTable()
+        }
     }
 
-    suspend fun clearAsteroidsData(): Int {
-        return database.asteroidDao.clearTable()
+    suspend fun clearAsteroidsData() {
+        withContext(Dispatchers.IO) {
+            database.asteroidDao.clearTable()
+        }
     }
 
-    suspend fun deleteAsteroidsBeforeDate(date: String): Int {
-        return database.asteroidDao.deleteAsteroidsBeforeDate(date)
+    suspend fun deleteAsteroidsBeforeDate(date: String) {
+        withContext(Dispatchers.IO){
+            database.asteroidDao.deleteAsteroidsBeforeDate(date)
+        }
     }
 
     private fun handleError(e: Exception) {

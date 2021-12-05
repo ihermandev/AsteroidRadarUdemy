@@ -1,5 +1,6 @@
 package com.udacity.asteroidradar.work
 
+import android.content.Context
 import android.os.Build
 import androidx.work.*
 import java.util.concurrent.TimeUnit
@@ -16,16 +17,16 @@ object RefreshDataConfigurator {
             }
         }.build()
 
-//    fun setupRecurringWork(constraints: Constraints = defConstraints) {
-//        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.DAYS)
-//            .setConstraints(constraints)
-//            .build()
-//
-//        WorkManager.getInstance().enqueueUniquePeriodicWork(
-//            RefreshDataWorker.WORK_NAME,
-//            ExistingPeriodicWorkPolicy.KEEP,
-//            repeatingRequest
-//        )
-//    }
+    fun setupRecurringWork(context: Context, constraints: Constraints = defConstraints) {
+        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.DAYS)
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+            RefreshDataWorker.WORK_NAME,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            repeatingRequest
+        )
+    }
 
 }
