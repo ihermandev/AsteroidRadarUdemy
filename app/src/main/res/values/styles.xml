@@ -6,6 +6,27 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="textAppearanceHeadline1">@style/CustomHeadline1</item>
+        <item name="textAppearanceHeadline2">@style/CustomHeadline2</item>
+        <item name="textAppearanceHeadline3">@style/CustomHeadline3</item>
+    </style>
+
+
+    <style name="CustomHeadline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="CustomHeadline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CustomHeadline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextTitle">
+        <item name="android:textAppearance">?textAppearanceHeadline1</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
