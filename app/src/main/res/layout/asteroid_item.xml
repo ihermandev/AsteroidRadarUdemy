@@ -33,6 +33,7 @@
 
             <TextView
                 android:id="@+id/tvName"
+                style="@style/TextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{asteroid.codename}"
@@ -45,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@{asteroid.closeApproachDate}"
+                android:textAppearance="?textAppearanceHeadline3"
                 android:textColor="@color/default_text_color"
                 tools:text="25.126 au" />
         </LinearLayout>
