@@ -74,3 +74,34 @@ fun goneIfNotNull(view: View, it: Any?) {
 fun visibleIfNotNull(view: View, it: Any?) {
     view.visibility = if (it != null) View.VISIBLE else View.GONE
 }
+
+@BindingAdapter("dynamicNasaImageContentDescription")
+fun dynamicNasaImageDescription(imageView: ImageView, title: String?) {
+    if (title != null) {
+        imageView.contentDescription =
+            imageView.context.getString(
+                R.string.nasa_picture_of_day_content_description_format,
+                title
+            )
+    } else {
+        imageView.contentDescription =
+            imageView.context.getString(R.string.this_is_nasa_s_picture_of_day_showing_nothing_yet)
+    }
+}
+
+@BindingAdapter("dynamicHazardousAsteroidContentDescription")
+fun dynamicHazardousAsteroidImageDescription(
+    imageView: ImageView,
+    isPotentiallyHazardous: Boolean = false
+) {
+    if (isPotentiallyHazardous) {
+        imageView.contentDescription =
+            imageView.context.getString(
+                R.string.potentially_hazardous_asteroid_image
+            )
+    } else {
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_image)
+    }
+}
+
