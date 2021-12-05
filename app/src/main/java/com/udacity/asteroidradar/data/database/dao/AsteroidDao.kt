@@ -28,5 +28,8 @@ interface AsteroidDao {
     ): LiveData<List<DatabaseAsteroid>>
 
     @Query("delete from $ASTEROID_TABLE")
-    suspend fun clearTable()
+    suspend fun clearTable(): Int
+
+    @Query("delete from $ASTEROID_TABLE where closeApproachDate < :date")
+    suspend fun deleteAsteroidsBeforeDate(date: String): Int
 }

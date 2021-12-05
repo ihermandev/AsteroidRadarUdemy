@@ -10,11 +10,12 @@ import com.udacity.asteroidradar.data.database.DataBasePicture
 
 @Dao
 interface PictureDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPicture(picture: DataBasePicture)
 
     @Query("delete from $PICTURE_TABLE")
-    suspend fun clearTable()
+    suspend fun clearTable(): Int
 
     @Query("select * from $PICTURE_TABLE ORDER BY id DESC LIMIT 1")
     fun getPictureOFDay(): LiveData<DataBasePicture>

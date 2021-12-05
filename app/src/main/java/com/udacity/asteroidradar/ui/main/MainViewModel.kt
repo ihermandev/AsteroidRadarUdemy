@@ -6,12 +6,8 @@ import com.udacity.asteroidradar.data.AsteroidsDataFilter
 import com.udacity.asteroidradar.data.api.todayDate
 import com.udacity.asteroidradar.data.database.getDatabase
 import com.udacity.asteroidradar.data.repository.AsteroidRepository
-import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -44,8 +40,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 repository.todayAsteroids
             }
             else -> {
-                repository.asteroids
+                repository.savedAsteroids
             }
+        }
+    }
+
+    fun clearPictureOfDayTable() {
+        viewModelScope.launch {
+            repository.clearImageOfDayData()
+        }
+    }
+
+    fun clearAsteroidsTable() {
+        viewModelScope.launch {
+            repository.clearAsteroidsData()
+        }
+    }
+
+    fun deleteAsteroidsBeforeDate(date: String = todayDate()) {
+        viewModelScope.launch {
+            repository.deleteAsteroidsBeforeDate(date)
         }
     }
 

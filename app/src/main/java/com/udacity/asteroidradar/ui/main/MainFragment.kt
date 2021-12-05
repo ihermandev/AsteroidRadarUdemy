@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.data.AsteroidsDataFilter
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
@@ -17,7 +17,7 @@ class MainFragment : Fragment() {
 
     private val asteroidAdapter: AsteroidListAdapter by lazy {
         AsteroidListAdapter(AsteroidClickListener { asteroid ->
-            findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroid))
+            view?.findNavController()?.navigate(MainFragmentDirections.actionShowDetail(asteroid))
         })
     }
 

@@ -27,7 +27,7 @@ class AsteroidRepository(
             it?.asDomainModel()
         }
 
-    val asteroids: LiveData<List<Asteroid>> =
+    val savedAsteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidDao.getAsteroidsSortedByDate()) {
             it?.asDomainModel()
         }
@@ -83,12 +83,16 @@ class AsteroidRepository(
         }
     }
 
-    suspend fun clearImageOfDayData() {
-        database.pictureDao.clearTable()
+    suspend fun clearImageOfDayData(): Int {
+        return database.pictureDao.clearTable()
     }
 
-    suspend fun clearAsteroidsData() {
-        database.asteroidDao.clearTable()
+    suspend fun clearAsteroidsData(): Int {
+        return database.asteroidDao.clearTable()
+    }
+
+    suspend fun deleteAsteroidsBeforeDate(date: String): Int {
+        return database.asteroidDao.deleteAsteroidsBeforeDate(date)
     }
 
     private fun handleError(e: Exception) {
