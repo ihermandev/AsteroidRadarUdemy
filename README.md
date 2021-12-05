@@ -12,50 +12,65 @@ This kind of app is one of the most usual in the real world, what you will learn
 
 ### Screenshots
 
-![Screenshot 1](starter/screenshots/screen_1.png)
-![Screenshot 2](starter/screenshots/screen_2.png)
-![Screenshot 3](starter/screenshots/screen_3.png)
-![Screenshot 4](starter/screenshots/screen_4.png)
+![Screenshot 1](screenshots/screen_1.png)
+![Screenshot 2](screenshots/screen_2.png)
+![Screenshot 3](screenshots/screen_3.png)
+![Screenshot 4](screenshots/screen_4.png)
 
 ### Dependencies
 
 ```
-implementation fileTree(dir: 'libs', include: ['*.jar'])
-implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-implementation 'androidx.appcompat:appcompat:1.1.0'
-implementation 'androidx.core:core-ktx:1.2.0'
-implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    // Kotlin
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    // Android
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
-implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
-implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_extensions_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_extensions_version"
 
-// Download and parse data
-implementation "com.squareup.moshi:moshi:1.8.0"
-implementation "com.squareup.moshi:moshi-kotlin:1.8.0"
-implementation "com.squareup.retrofit2:retrofit:2.6.2"
-implementation "com.squareup.retrofit2:converter-moshi:2.5.0"
-implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
 
-// Kotlin coroutines
-implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0"
-implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
-implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
-implementation "androidx.recyclerview:recyclerview:1.1.0"
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
-// Image downloader
-implementation 'com.squareup.picasso:picasso:2.5.2'
+    //Moshi
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
 
-implementation "androidx.room:room-runtime:2.2.3"
-kapt "androidx.room:room-compiler:2.2.3"
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_converter_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_converter_version"
 
-implementation "android.arch.work:work-runtime-ktx:1.0.1"
+    //    Coroutines - Deprecated - No more required
+    //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+    //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+    //    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kotlinx_coroutines_adapter_version"
 
-testImplementation 'junit:junit:4.12'
-androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    //WorkManager
+    implementation "androidx.work:work-runtime-ktx:$work_manager_version"
+
+    //Logger
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    //Testing
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_ext_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_core_version"
 ```
 
 ### Installation
@@ -80,14 +95,6 @@ git checkout master
 **Step 3: Run the project and check that it compiles correctly**
 
 Open the project in Android Studio and click the Run ‘app’ button, check that it runs correctly and you can see the app in your device or emulator.
-
-## Testing
-
-Explain the steps needed to run any automated tests
-
-### Break Down Tests
-
-Explain what each test does and why
 
 ```
 Examples here
@@ -127,6 +134,29 @@ To build this project you are going to use the NASA NeoWS (Near Earth Object Web
 https://api.nasa.gov/
 
 You will need an API Key which is provided for you in that same link, just fill the fields in the form and click Signup.
+
+## Important
+
+In order to run project properly you need to create "keystore" folder in project root directory, after this step put "project.properties" file which store "nasa api_key=YOUR_API_KEY" variable inside "keystore" folder.
+
+![Directory example](screenshots/important_notice.png)
+
+or as an alternative option
+
+Remove this piece of implementation in app:build.gradle
+
+```
+def keystorePropertiesFile = rootProject.file("keystore/project.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+```
+
+and modify NASA_API_KEY build config variable with your nasa api key
+
+```
+buildConfigField "String", "NASA_API_KEY", "YOUR_API_KEY"
+```
+
 
 ## License
 
