@@ -48,10 +48,10 @@ This kind of app is one of the most usual in the real world, what you will learn
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_converter_version"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_converter_version"
 
-//    Coroutines - Deprecated - No more required
-//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
-//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
-//    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kotlinx_coroutines_adapter_version"
+    //    Coroutines - Deprecated - No more required
+    //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+    //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+    //    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kotlinx_coroutines_adapter_version"
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$picasso_version"
@@ -137,9 +137,26 @@ You will need an API Key which is provided for you in that same link, just fill 
 
 ## Important
 
-In order to run app properly you need to create "keystore" folder in project root directory, after this step put "project.properties" file which store "nasa api_key=<YOUR API KEY>" variable inside "keystore" folder.
+In order to run project properly you need to create "keystore" folder in project root directory, after this step put "project.properties" file which store "nasa api_key=YOUR_API_KEY" variable inside "keystore" folder.
 
 ![Directory example](screenshots/important_notice.png)
+
+or as an alternative option
+
+Remove this piece of implementation in app:build.gradle
+
+```
+def keystorePropertiesFile = rootProject.file("keystore/project.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+```
+
+and modify NASA_API_KEY build config variable with your nasa api key
+
+```
+buildConfigField "String", "NASA_API_KEY", "YOUR_API_KEY"
+```
+
 
 ## License
 
